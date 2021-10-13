@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^3.3.0",
     "firebase": "^9.1.2",
     "next": "11.1.2",
     "react": "17.0.2",
