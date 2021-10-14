@@ -8,18 +8,15 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore'
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { firebaseConfig } from '../../../lib/firebase/constants'
 
+import { Entry } from '../../../models/entry'
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 
-type Data = {
-  id?: string
-  name?: string
-}
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Entry>
 ) {
   const {
     query: { id },
@@ -42,6 +39,6 @@ export default async function handler(
         break
     }
   } catch (e) {
-    res.status(404).json({})
+    res.status(404).json(<Entry>{})
   }
 }

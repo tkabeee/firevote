@@ -8,18 +8,15 @@ import { getFirestore, collection, getDocs } from 'firebase/firestore'
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { firebaseConfig } from '../../../lib/firebase/constants'
 
+import { Entry } from '../../../models/entry'
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 
-type Data = {
-  id?: string
-  name?: string
-}
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data[]>
+  res: NextApiResponse<Entry[]>
 ) {
   try {
     const docSnap = await getDocs(collection(db, 'entries'))
@@ -27,6 +24,6 @@ export default async function handler(
       .status(200)
       .json(docSnap.docs.map((d) => ({ id: d.id, name: d.data().name })))
   } catch (e) {
-    res.status(404).json([{}])
+    res.status(404).json([<Entry>{}])
   }
 }
